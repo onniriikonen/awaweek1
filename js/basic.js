@@ -3,11 +3,11 @@ container.classList.add("container");
 document.body.appendChild(container);
 
 const data = [
-    { title: "Rottweiler", text: "text", breed: "rottweiler" },
-    { title: "Saluki", text: "text", breed: "saluki"},
-    { title: "Pug", text: "text", breed: "pug" },
-    { title: "German shepherd", text: "text", breed: "germanshepherd" },
-    { title: "Beagle", text: "text", breed: "beagle" }
+    { title: "Rottweiler", text: "Rottweiler", breed: "rottweiler" },
+    { title: "Saluki", text: "Saluki", breed: "saluki"},
+    { title: "Pug", text: "Pug", breed: "pug" },
+    { title: "German shepherd", text: "German_shepherd", breed: "germanshepherd" },
+    { title: "Beagle", text: "Beagle", breed: "beagle" }
 
 ];
 
@@ -17,9 +17,16 @@ async function fetchImage(breed) {
     return data.message;
 }
 
+async function fetchText(text) {
+    const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${text}`);
+    const data = await response.json();
+    return data.extract;
+}
+
 async function create({ title, text, breed }) {
 
     const img = await fetchImage(breed);
+    const info = await fetchText(text);
 
     const wikiItem = document.createElement("div");
     wikiItem.classList.add("wiki-item");
@@ -33,7 +40,7 @@ async function create({ title, text, breed }) {
 
     const wikiText = document.createElement("p");
     wikiText.classList.add("wiki-text");
-    wikiText.textContent = text;
+    wikiText.textContent = info;
 
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("img-container");
