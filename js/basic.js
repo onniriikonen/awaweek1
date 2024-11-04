@@ -3,15 +3,24 @@ container.classList.add("container");
 document.body.appendChild(container);
 
 const data = [
-    { title: "Dog1", img: "dog/dog1.jpeg", text: "text" },
-    { title: "Dog2", img: "dog/dog2.jpeg", text: "text" },
-    { title: "Dog3", img: "dog/dog3.jpeg", text: "text" },
-    { title: "Dog4", img: "dog/dog4.jpeg", text: "text" },
-    { title: "Dog5", img: "dog/dog5.jpeg", text: "text" }
+    { title: "Rottweiler", text: "text", breed: "rottweiler" },
+    { title: "Saluki", text: "text", breed: "saluki"},
+    { title: "Pug", text: "text", breed: "pug" },
+    { title: "German shepherd", text: "text", breed: "germanshepherd" },
+    { title: "Beagle", text: "text", breed: "beagle" }
 
 ];
 
-function create({ title, img, text }) {
+async function fetchImage(breed) {
+    const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`);
+    const data = await response.json();
+    return data.message;
+}
+
+async function create({ title, text, breed }) {
+
+    const img = await fetchImage(breed);
+
     const wikiItem = document.createElement("div");
     wikiItem.classList.add("wiki-item");
 
