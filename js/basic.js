@@ -1,6 +1,6 @@
-const wikiItem = document.createElement("div");
-wikiItem.classList.add("wiki-item");
-document.body.appendChild(wikiItem);
+const container = document.createElement("div");
+container.classList.add("container");
+document.body.appendChild(container);
 
 const data = [
     { title: "Dog1", img: "dog/dog1.jpeg", text: "text" },
@@ -12,7 +12,8 @@ const data = [
 ];
 
 function create({ title, img, text }) {
-    
+    const wikiItem = document.createElement("div");
+    wikiItem.classList.add("wiki-item");
 
     const header = document.createElement("h1");
     header.classList.add("wiki-header");
@@ -37,6 +38,8 @@ function create({ title, img, text }) {
     wikiContent.appendChild(imgContainer);
     wikiItem.appendChild(header);
     wikiItem.appendChild(wikiContent);
+
+    container.appendChild(wikiItem);
 }
 
 data.forEach(create);
