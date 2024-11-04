@@ -43,8 +43,8 @@ async function create({ title, text, breed }) {
     image.src = img
 
     imgContainer.appendChild(image);
-    wikiContent.appendChild(wikiText);
     wikiContent.appendChild(imgContainer);
+    wikiContent.appendChild(wikiText);
     wikiItem.appendChild(header);
     wikiItem.appendChild(wikiContent);
 
